@@ -5,3 +5,6 @@ fetch('https://canvasjs.com/services/data/datapoints.php').then(function(respons
     });
   });
   console.log(dataPoint);
+
+  let table1 = document.getElementById('table1');
+  let table2 = document.getElementById('table2');
