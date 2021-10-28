@@ -1,10 +1,44 @@
-//  let tab = [];
-//  fetch("https://canvasjs.com/services/data/datapoints.php")
-//      .then(response => response.json())
-//      .then(response => console.log(JSON.stringify(response)))
-//      .then(response => tab = response)
-//      .catch(error => console.log('Erreur:' + error));
-//  console.log(tab);
+let content = document.getElementById("toc");
+let firstChart = document.createElement("div");
+firstChart.id = "chartContainer";
+
+content.parentNode.insertBefore(firstChart, content);
+
+let dataPoint = [];
+fetch('https://canvasjs.com/services/data/datapoints.php').then(function(response) {
+    response.json().then(json => {
+      json.forEach( element => {dataPoint.push({x : element[0], y : element[1]})});
+      chart = new CanvasJS.Chart("chartContainer",{
+        title:{
+            text:"Exo2"
+        },
+        data: [{
+        type: "line",
+        dataPoints : dataPoint,
+        }]
+    });
+    chart.render();
+    updateChart();
+    });
+  });
+  
+
+function updateChart() {
+  fetch("https://canvasjs.com/services/data/datapoints.php", {cache : "reload"}).then(function(reponse) {
+    reponse.json().then(json =>
+       json.forEach(element => {
+         dataPoint.pop()
+            dataPoint.push({
+               x: element[0],
+               y: element[1]
+           });
+      }));
+      chart.render();
+      setTimeout(function(){updateChart()}, 1000);
+      console.log(dataPoint)
+   });
+}
+
 function getTableData(id) {
     let tr = document.getElementById(id).querySelectorAll('tbody tr');
     let td = [];
