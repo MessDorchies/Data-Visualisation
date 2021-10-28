@@ -3,43 +3,43 @@ let firstChart = document.createElement("div");
 firstChart.id = "chartContainer";
 firstChart.style.width = "700px";
 firstChart.style.height = "300px";
-firstChart.style.position ="relative";
+firstChart.style.position = "relative";
 
 content.parentNode.insertBefore(firstChart, content);
 
 let dataPoint = [];
 fetch('https://canvasjs.com/services/data/datapoints.php').then(function(response) {
     response.json().then(json => {
-      json.forEach( element => {dataPoint.push({x : element[0], y : element[1]})});
-      chart = new CanvasJS.Chart("chartContainer",{
-        title:{
-            text:"Exo2"
-        },
-        data: [{
-        type: "line",
-        dataPoints : dataPoint,
-        }]
+        json.forEach(element => { dataPoint.push({ x: element[0], y: element[1] }) });
+        chart = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: "Exo2"
+            },
+            data: [{
+                type: "line",
+                dataPoints: dataPoint,
+            }]
+        });
+        chart.render();
+        updateChart();
     });
-    chart.render();
-    updateChart();
-    });
-  });
-  
+});
+
 
 function updateChart() {
-  fetch("https://canvasjs.com/services/data/datapoints.php", {cache : "reload"}).then(function(reponse) {
-    reponse.json().then(json =>
-       json.forEach(element => {
-         dataPoint.pop()
-            dataPoint.push({
-               x: element[0],
-               y: element[1]
-           });
-      }));
-      chart.render();
-      setTimeout(function(){updateChart()}, 1000);
-      console.log(dataPoint)
-   });
+    fetch("https://canvasjs.com/services/data/datapoints.php", { cache: "reload" }).then(function(reponse) {
+        reponse.json().then(json =>
+            json.forEach(element => {
+                dataPoint.pop()
+                dataPoint.push({
+                    x: element[0],
+                    y: element[1]
+                });
+            }));
+        chart.render();
+        setTimeout(function() { updateChart() }, 1000);
+        console.log(dataPoint)
+    });
 }
 
 function getTableData(id) {
@@ -93,10 +93,10 @@ const myChart = new Chart(ctx, {
                 label: labels1[2],
                 data: data1[2],
                 backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
+                    '#' + Math.floor(Math.random() * 16777215).toString(16),
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
+                    '#' + Math.floor(Math.random() * 16777215).toString(16),
                 ],
                 borderWidth: 1
             },
@@ -107,7 +107,7 @@ const myChart = new Chart(ctx, {
                 label: labels1[3],
                 data: data1[3],
                 backgroundColor: [
-                    '#' + Math.floor(Math.random() * 16777215).toString(16), ,
+                    '#' + Math.floor(Math.random() * 16777215).toString(16),
                 ],
                 borderColor: [
                     '#' + Math.floor(Math.random() * 16777215).toString(16),
@@ -494,7 +494,7 @@ const ctx1 = document.getElementById('myChart1').getContext('2d');
 const myChart1 = new Chart(ctx1, {
     type: 'bar',
     data: {
-        labels: [20072009, 20102012],
+        labels: ['2007 - 2009', '2010 - 2012'],
         datasets: [{
                 label: labels2[1],
                 data: data2[1],
