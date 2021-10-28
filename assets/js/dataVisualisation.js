@@ -1,6 +1,9 @@
 let content = document.getElementById("toc");
 let firstChart = document.createElement("div");
 firstChart.id = "chartContainer";
+firstChart.style.width = "700px";
+firstChart.style.height = "300px";
+firstChart.style.position ="relative";
 
 content.parentNode.insertBefore(firstChart, content);
 
